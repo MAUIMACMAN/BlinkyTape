@@ -125,6 +125,19 @@ class ProcessLauncher {
     }
   }
 
+  int getExitValue() {
+    return shell.exitValue();
+  }
+
+  boolean isRunning() {
+    try {
+      getExitValue();
+      return false;
+    }
+    catch( IllegalThreadStateException e) {
+      return true;
+    }
+  }
 
   boolean hasData() {
     return (outputQueue.size() > 0);

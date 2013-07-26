@@ -11,7 +11,9 @@ cat pov.hex PatternPlayer.hex > munged.hex
 # First, set the baud rate to 1200 to trigger a firmware reset
 stty -f ${SERIAL_DEVICE} 1200
 
-sleep 1
+# Sleep a bit for the Arduino to reset and re-enumerate on the USB bus
+sleep 1.5
+
 # Next, program the board.
 ./avrdude-mac -cavr109 -pm32u4  -b57600 -P${SERIAL_DEVICE} -D -Uflash:w:${FIRMWARE_FILE}:i 
 

@@ -45,6 +45,7 @@ class LineTool {
       endX = screenToBuffX(mouseX);
       endY = screenToBuffY(mouseY);
       img = buff.get(0, 0, buff.width, buff.height);
+      toolBuff.noSmooth();
       toolBuff.beginDraw();
       toolBuff.background(img);
       toolBuff.strokeWeight(size);

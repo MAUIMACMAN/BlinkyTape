@@ -2,9 +2,11 @@ import processing.serial.*;
 import controlP5.*;
 //import processing.opengl.*;
 //import javax.media.opengl.GL;
+import java.awt.event.KeyEvent;
 
 ControlP5 controlP5;
 LedOutput led = null;
+String port = null;
 
 PFont myFont;
 ColorPicker cp;
@@ -21,7 +23,8 @@ void setup() {
   buffer = createGraphics(60, 60, JAVA2D);
   size(windowWidthForBuffer(buffer), 380, JAVA2D);
 
-//  noSmooth();
+  noSmooth();
+  
 //  // Turn on vsync to prevent tearing
 //  PGraphicsOpenGL pgl = (PGraphicsOpenGL) g; //processing graphics object
 //  GL gl = pgl.beginGL(); //begin opengl
@@ -42,10 +45,11 @@ void setup() {
                       buffScale * buffer.height);
                       
   for(String p : Serial.list()) {
-//    if(p.startsWith("/dev/cu.usbmodem")) {
-//      led = new LedOutput(this, p, 60);
-//      break;  // TODO: does this work?
-//    }
+    if(p.startsWith("/dev/cu.usbmodem")) {
+      port = p;
+      led = new LedOutput(this, p, 60);
+      break;  // TODO: does this work?
+    }
   }
 
   controlP5 = new ControlP5(this);
@@ -246,16 +250,32 @@ void savePattern() {
 }
 
 void launchProcess() {
+  // Kill the LedOutput
+  led.m_outPort.stop();
+  led = null;
+  
+  
   savePattern();
-  ProcessLauncher p = new ProcessLauncher(sketchPath("program.sh") + " " + "/dev/cu.usbmodemfa131");
+  ProcessLauncher p = new ProcessLauncher(sketchPath("program.sh") + " " + "/dev/cu.usbmodem1411");
   delay(100);
-  print(p.read());
+  
+  while(p.isRunning()) {
+    delay(100);
+  }
+  print(p.getExitValue());
+  delay(1500);  // Wait for the Arduino to come online again
+  
+  // Restore the LedOutput
+  led = new LedOutput(this, port, 60);
 }
 
 void importImage() {
-  String imgPath = selectInput("Select an imagefile to import");
+  selectInput("Select an imagefile to import", "importFileSelected");
+}
+
+void importFileSelected(File imgPath) {
   if (imgPath != null) {
-    PImage img = loadImage(imgPath);
+    PImage img = loadImage(imgPath.getAbsolutePath());
     // create a new buffer to fit this image
     buffer = createGraphics(img.width, img.height, JAVA2D);
     buffer.beginDraw();
@@ -273,10 +293,13 @@ void importImage() {
 }
 
 void saveAsImage() {
-  String imgPath = selectOutput("Save PNG file");
+  selectOutput("Save PNG file", "saveAsFileSelected");
+}
+
+void saveAsFileSelected(File imgPath) {
   if(imgPath != null) {
     PImage img = buffer.get(0, 0, buffer.width, buffer.height);
-    img.save(imgPath);
+    img.save(imgPath.getAbsolutePath());
     println("Saved PNG file to '" + imgPath + "'.");
   }
 }

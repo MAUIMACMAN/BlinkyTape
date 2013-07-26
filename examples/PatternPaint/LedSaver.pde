@@ -1,3 +1,4 @@
+import java.util.*;
 
 // These need to agree with the defines in PatternPlayer sketch.
 int ANIMATION_DATA_ADDRESS = 0x4000;

@@ -1,3 +1,5 @@
+import java.io.*;
+
 // We want to make some hex data!
 
 
