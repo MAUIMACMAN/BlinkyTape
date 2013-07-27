@@ -5,9 +5,9 @@
 struct CRGB leds[LED_COUNT];
 
 #define LED_PIN 5  // 5 for RevB, 13 for RevD
-#define BUTTON_PIN 10
-#define IO_A 7
-#define IO_B 11
+#define BUTTON_PIN 10 // For RevD
+#define IO_A 7  // For RevD
+#define IO_B 11  // For RevD
 
 long last_time;
 

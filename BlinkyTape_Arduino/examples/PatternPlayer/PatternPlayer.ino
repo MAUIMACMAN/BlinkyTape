@@ -6,13 +6,18 @@
 #define LED_COUNT 60
 struct CRGB leds[LED_COUNT];
 
+#define LED_PIN 13  // 5 for RevB, 13 for RevD
+#define BUTTON_PIN 10 // For RevD
+#define IO_A 7  // For RevD
+#define IO_B 11  // For RevD
+
 Animation pov;
 
 void setup()
 {  
   Serial.begin(57600);
 
-  LEDS.addLeds<WS2811, 5, GRB>(leds, LED_COUNT);
+  LEDS.addLeds<WS2811, LED_PIN, GRB>(leds, LED_COUNT);
   LEDS.showColor(CRGB(0, 0, 0));
   LEDS.setBrightness(230); // 90% brightness
   LEDS.show();

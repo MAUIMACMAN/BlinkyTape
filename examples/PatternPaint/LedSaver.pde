@@ -1,7 +1,7 @@
 import java.util.*;
 
 // These need to agree with the defines in PatternPlayer sketch.
-int ANIMATION_DATA_ADDRESS = 0x4000;
+int ANIMATION_DATA_ADDRESS = 0x4000;  //Sketch ends at 1E8C = 
 int CONTROL_DATA_ADDRESS = (0x7000 - 4);
   
 

@@ -8,7 +8,7 @@ class LedOutput
   private int m_numberOfLEDs;
   
   float m_brightness = .6;
-  float m_gammaValue = .65;
+  float m_gammaValue = .9;
   boolean m_enableGammaCorrection = true;
 
   LedOutput(PApplet parent, String portName, int numberOfLEDs) {

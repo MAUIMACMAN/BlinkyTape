@@ -98,8 +98,8 @@ void setup() {
     .setSize(100,15)
     .setId(5)
     .getCaptionLabel().set("Save to BlinkyTape");
-    
-    
+
+  prepareExitHandler(this);
 }
 
 float pos = 0;
@@ -120,6 +120,25 @@ void draw() {
   if(led != null) {
     led.sendUpdate(buffer, pos, 0, pos, buffer.height);
   }
+}
+
+PApplet globalParent;
+
+// From here: https://forum.processing.org/topic/run-code-on-exit
+// On stop, reset the Arduino
+private void prepareExitHandler (PApplet parent) {
+  globalParent = parent;
+  print("test");
+  Runtime.getRuntime().addShutdownHook(new Thread(new Runnable() {
+    public void run () {
+      // Reset the blinkytape, so that it starts playing the pattern again.
+      // TODO: Make a command for this so it isn't so janky.
+      // Kill the LedOutput
+      led.m_outPort.stop();
+      Serial s;
+      s = new Serial(globalParent, port, 1200);  // Magic reset baudrate
+    }
+  }));
 }
 
 void keyPressed() {
@@ -256,7 +275,7 @@ void launchProcess() {
   
   
   savePattern();
-  ProcessLauncher p = new ProcessLauncher(sketchPath("program.sh") + " " + "/dev/cu.usbmodem1411");
+  ProcessLauncher p = new ProcessLauncher(sketchPath("program.sh") + " " + port);
   delay(100);
   
   while(p.isRunning()) {
