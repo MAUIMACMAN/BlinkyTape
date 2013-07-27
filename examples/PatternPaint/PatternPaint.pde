@@ -137,6 +137,8 @@ private void prepareExitHandler (PApplet parent) {
       led.m_outPort.stop();
       Serial s;
       s = new Serial(globalParent, port, 1200);  // Magic reset baudrate
+      delay(100);
+      s.stop();
     }
   }));
 }
