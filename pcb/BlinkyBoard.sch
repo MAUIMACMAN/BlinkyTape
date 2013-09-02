@@ -3933,7 +3933,7 @@ Metric Code Size 5664</description>
 <label x="180.34" y="91.44" size="1.778" layer="95" rot="R180" xref="yes"/>
 </segment>
 </net>
-<net name="A10" class="0">
+<net name="A9" class="0">
 <segment>
 <pinref part="U$2" gate="G$1" pin="(PCINT5/OC1A/#OC4B/ADC12)PB5"/>
 <wire x1="96.52" y1="81.28" x2="99.06" y2="81.28" width="0.1524" layer="91"/>

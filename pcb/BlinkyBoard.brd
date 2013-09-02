@@ -151,7 +151,7 @@ Tape</text>
 <text x="20.5" y="8.75" size="0.75" layer="26" font="vector" ratio="15" rot="MR0" align="bottom-center">5V</text>
 <text x="20.75" y="2" size="0.75" layer="26" font="vector" ratio="15" rot="MR0" align="center">GND</text>
 <text x="20.5" y="8.75" size="0.75" layer="26" font="vector" ratio="15" rot="MR0" align="bottom-center">5V</text>
-<text x="20.75" y="5" size="0.75" layer="26" font="vector" ratio="15" rot="MR0" align="center">A11</text>
+<text x="20.75" y="5" size="0.75" layer="26" font="vector" ratio="15" rot="MR0" align="center">A9</text>
 <text x="4.35" y="6.25" size="0.75" layer="26" font="vector" ratio="15" rot="MR0" align="center">D7</text>
 <text x="4.65" y="3.75" size="0.75" layer="26" font="vector" ratio="15" rot="MR0" align="center">D11</text>
 <text x="0.5" y="10.75" size="0.8128" layer="46">Slot drill with copper</text>
@@ -944,7 +944,7 @@ Modified from Laen's PCB Order Design Rules</description>
 <wire x1="9.14" y1="7.85" x2="9.14" y2="7.75" width="0.254" layer="1"/>
 <wire x1="9.14" y1="7.75" x2="10.225" y2="7.75" width="0.254" layer="1"/>
 </signal>
-<signal name="A10">
+<signal name="A9">
 <contactref element="U$2" pad="29"/>
 <via x="18.8" y="6.1" extent="1-16" drill="0.35"/>
 <contactref element="U$11" pad="P$1"/>
